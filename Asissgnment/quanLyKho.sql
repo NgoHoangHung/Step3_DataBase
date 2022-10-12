@@ -1,0 +1,1 @@
+SELECT distinct price FROM quan_ly_kho
