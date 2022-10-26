@@ -1,0 +1,83 @@
+-- CREATE DATABASE quan_li_thuc_tap
+-- CREATE TABLE department(
+-- id INT PRIMARY KEY AUTO_INCREMENT,
+-- department_credient VARCHAR(250),
+-- department_name VARCHAR(250),
+-- department_phone VARCHAR(250)
+-- );
+-- CREATE TABLE student(
+-- id INT PRIMARY KEY AUTO_INCREMENT,
+-- student_credient int,
+-- student_name VARCHAR(250),
+-- student_gender ENUM ('male','female'),
+-- student_birthday YEAR,
+-- student_town varchar(250),
+-- department_student_credient VARCHAR(250),
+-- FOREIGN KEY (department_student_credient)  references department(department_credient)
+-- );
+-- CREATE TABLE teacher(
+-- id INT PRIMARY KEY AUTO_INCREMENT,
+-- teacher_credient INT,
+-- teacher_name VARCHAR(250),
+-- department_teacher_credient VARCHAR(250),
+-- teacher_salary INT,
+-- FOREIGN KEY (department_teacher_credient) references department(department_credient)
+-- );
+-- CREATE TABLE subject_matter(
+-- id INT PRIMARY KEY AUTO_INCREMENT,
+-- submat_credient VARCHAR(250),
+-- submat_name VARCHAR(250),
+-- submat_cost INT,
+-- intern_place VARCHAR(250)
+-- );
+-- CREATE TABLE introduce_info(
+-- id INT PRIMARY KEY AUTO_INCREMENT,
+-- student_intro_credient  VARCHAR(250),
+-- department_intro_credient VARCHAR(250),
+-- teacher_intro_credient INT,
+-- FOREIGN KEY (student_intro_credient) references student(student_credient),
+-- FOREIGN KEY (department_intro_credient) references department(department_credient),
+-- FOREIGN KEY (teacher_intro_credient) references teacher(teacher_credient),
+-- resul ENUM('Null','1','2','3','4','5','6','7','8','9','0')
+-- );
+-- INSERT INTO department(department_credient,department_name,department_phone)
+-- VALUES 
+-- ('Geo', 'Dia ly va QLTN', 3855413), 
+-- 	('Math', 'Toan', 3855411), 
+-- 	('Bio', 'Cong nghe Sinh hoc', 3855412)
+-- ;
+-- INSERT INTO teacher(teacher_credient,teacher_name,teacher_salary,department_credient)
+-- VALUES
+-- (11, 'Thanh Xuan', 700, 'Geo'), 
+-- 	(12, 'Thu Minh', 500, 'Math'), 
+-- 	(13, 'Chu Tuan', 650, 'Geo'), 
+-- 	(14, 'Le Thi Lan', 500, 'Bio'), 
+-- 	(15, 'Tran Xoay', 900, 'Math')
+-- ;
+-- INSERT INTO student(id,student_name,department_credient,student_birthday,student_town)
+-- VALUES
+-- (1, 'Le Van Sao', 'Bio', 1990, 'Nghe An'), 
+-- 	(2, 'Nguyen Thi My', 'Geo', 1990, 'Thanh Hoa'), 
+-- 	(3, 'Bui Xuan Duc', 'Math', 1992, 'Ha Noi'), 
+-- 	(4, 'Nguyen Van Tung', 'Bio', null, 'Ha Tinh'), 
+-- 	(5, 'Le Khanh Linh', 'Bio', 1989, 'Ha Nam'), 
+-- 	(6, 'Tran Khac Trong', 'Geo', 1991, 'Thanh Hoa'), 
+-- 	(7, 'Le Thi Van', 'Math', null, 'null'), 
+-- 	(8, 'Hoang Van Duc', 'Bio', 1992, 'Nghe An')
+-- ;
+-- INSERT INTO subject_matter(submat_credient,submat_name,submat_cost,intern_place)
+-- VALUES 
+-- ('Dt01', 'GIS', 100, 'Nghe An'),
+-- 	('Dt02', 'ARC GIS', 500, 'Nam Dinh'),
+-- 	('Dt03', 'Spatial DB', 100, 'Ha Tinh'),
+-- 	('Dt04', 'MAP', 300, 'Quang Binh')
+-- ;
+-- INSERT INTO introduce_info(id,department_credient,teacher_credient,resul)
+-- VALUES 
+-- (1, 'Dt01', 13, 8),
+-- (2, 'Dt03', 14, 0),
+-- (3, 'Dt03', 12, 10),
+-- (5, 'Dt04', 14, 7),
+-- (6, 'Dt01', 13, Null),
+-- (7, 'Dt04', 11, 10),
+-- (8, 'Dt03', 15, 6)
