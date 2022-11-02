@@ -1,0 +1,115 @@
+-- CREATE DATABASE assignment04
+
+-- DROP TABLE if exists khoa;
+-- CREATE TABLE khoa(
+-- ma_khoa VARCHAR(50) PRIMARY KEY ,
+-- id INT,
+-- ten_khoa VARCHAR(250),
+-- sdt_khoa VARCHAR(250)
+-- );
+--  INSERT INTO khoa( id,ma_khoa,ten_khoa,sdt_khoa)
+--  values
+--  	(1,'Geo', 'Dia ly va QLTN', 3855413), 
+-- 	(2,'Math', 'Toan', 3855411), 
+-- 	(3,'Bio', 'Cong nghe Sinh hoc', 3855412);
+
+-- DROP TABLE if exists sinh_vien;
+-- CREATE TABLE sinh_vien(
+-- id INT  ,
+-- ma_sinh_vien INT(8) PRIMARY KEY,
+-- ho_ten_sinh_vien VARCHAR(250),
+-- ma_khoa VARCHAR(50),
+-- gioi_tinh ENUM ('nam','nu'),
+-- que_quan VARCHAR(250),
+-- FOREIGN KEY (ma_khoa) REFERENCES khoa(ma_khoa)
+-- );
+-- INSERT INTO sinh_vien( id,ma_sinh_vien,ho_ten_sinh_vien,ma_khoa,gioi_tinh,que_quan)
+-- values
+-- 	(1,112311, 'Le Van Sao', 'Bio', 'nam', 'Nghe An'), 
+-- 	(2,112312, 'Nguyen Thi My', 'Geo', 'nu', 'Thanh Hoa'), 
+-- 	(3,112313, 'Bui Xuan Duc', 'Math', 'nam', 'Ha Noi'), 
+-- 	(4,112314, 'Nguyen Van Tung', 'Bio', 'nam', 'Ha Tinh'), 
+-- 	(5,112315, 'Le Khanh Linh', 'Bio', 'nu', 'Ha Nam'), 
+-- 	(6,112316, 'Tran Khac Trong', 'Geo', 'nam', 'Thanh Hoa'), 
+-- 	(7,112317, 'Le Thi Van', 'Math', 'nu', 'null'), 
+-- 	(8,112318, 'Hoang Van Duc', 'Bio', 'nam', 'Nghe An');
+
+-- DROP TABLE if exists giang_vien;
+-- CREATE TABLE giang_vien(
+-- id INT,
+-- ma_giang_vien INT(8) PRIMARY KEY,
+-- ho_ten_giang_vien VARCHAR(250),
+-- ma_khoa VARCHAR(50),
+-- luong INT,
+-- FOREIGN KEY (ma_khoa) REFERENCES khoa(ma_khoa)
+-- );
+-- insert into giang_vien(id,ma_giang_vien,ho_ten_giang_vien,luong,ma_khoa)
+-- values
+-- 	(1,121, 'Thanh Xuan', 700, 'Geo'), 
+-- 	(2,122, 'Thu Minh', 500, 'Math'), 
+-- 	(3,123, 'Chu Tuan', 650, 'Geo'), 
+-- 	(4,124, 'Le Thi Lan', 500, 'Bio'), 
+-- 	(5,125, 'Tran Xoay', 900, 'Math');
+-- 	
+	
+-- DROP TABLE if exists de_tai;
+-- CREATE TABLE de_tai(
+-- id INT ,
+-- ma_de_tai VARCHAR(250) PRIMARY KEY,
+-- ten_de_tai VARCHAR(250),
+-- kinh_phi int,
+-- noi_thuc_tap VARCHAR(250)
+-- );
+-- INSERT INTO de_tai(id,ma_de_tai,ten_de_tai,kinh_phi,noi_thuc_tap)
+-- VALUES
+--  	(1,'Dt01', 'GIS', 100, 'Nghe An'),
+-- 	(2,'Dt02', 'ARC GIS', 500, 'Nam Dinh'),
+-- 	(3,'Dt03', 'Spatial DB', 100, 'Ha Tinh'),
+-- 	(4,'Dt04', 'MAP', 300, 'Quang Binh');
+
+-- DROP TABLE if exists thong_tin_huong_dan;
+-- CREATE TABLE thong_tin_huong_dan(
+-- id INT PRIMARY KEY AUTO_INCREMENT,
+-- ma_sinh_vien INT(8),
+-- ma_de_tai VARCHAR(250),
+-- ma_giang_vien INT(8),
+-- ket_qua VARCHAR(250),
+-- FOREIGN KEY (ma_sinh_vien) REFERENCES sinh_vien(ma_sinh_vien),
+-- FOREIGN KEY (ma_de_tai) REFERENCES de_tai(ma_de_tai),
+-- FOREIGN KEY (ma_giang_vien) REFERENCES giang_vien(ma_giang_vien)
+-- );
+-- INSERT INTO thong_tin_huong_dan(ma_sinh_vien,ma_de_tai,ma_giang_vien,ket_qua)
+-- values
+-- 	(112311, 'Dt01', 123, 8),
+-- 	(112312, 'Dt03', 124, 0),
+-- 	(112313, 'Dt03', 122, 10),
+-- 	(112315, 'Dt04', 124, 7),
+-- 	(112316, 'Dt01', 124, Null),
+-- 	(112317, 'Dt04', 121, 10),
+-- 	(112318, 'Dt03', 125, 6);
+
+-- SELECT ma_giang_vien,ho_ten_giang_vien,ma_khoa
+-- FROM giang_vien
+
+-- b, Lấy thông tin gồm mã giảng viên, tên giảng viên, tên khoa hướng dẫn từ 3 sinh viên trở lên
+-- SELECT ma_giang_vien,ho_ten_giang_vien,ten_khoa
+-- FROM giang_vien JOIN khoa
+-- ON giang_vien.ma_khoa = khoa.ma_khoa
+-- WHERE ma_giang_vien IN
+-- (SELECT ma_giang_vien
+-- from thong_tin_huong_dan 
+-- GROUP by  ma_giang_vien
+-- HAVING COUNT(ma_giang_vien) >=3 )
+
+-- c,Lấy ra thông tin những sinh viên chưa có điểm thực tập
+
+-- SELECT *
+-- FROM sinh_vien 
+-- WHERE ma_sinh_vien in
+-- (
+-- SELECT ma_sinh_vien
+-- FROM thong_tin_huong_dan
+-- WHERE ket_qua IS NULL
+-- )
+
+

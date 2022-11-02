@@ -64,23 +64,91 @@
 -- WHERE product_name = 'Tiêu bắc'
 
 
-DELETE FROM builder
-WHERE country = 'INDIA' AND price > 900 AND price <1200 
--- (
--- SELECT country
--- FROM builder
--- WHERE country = 'INDIA')
--- AND
--- (SELECT country
--- FROM builder
--- WHERE price > 900 and price < 1200
--- )
- 
+-- SELECT *
+--  FROM builder
+-- WHERE country = 'INDIA' AND price between 900 AND 1500 
+
+-- 
+-- SELECT * 
+-- FROM builder 
+-- WHERE country IN ('india','us')
+
+-- CREATE TABLE film (
+-- id INT PRIMARY KEY AUTO_INCREMENT,
+-- film_title VARCHAR(250),
+-- filmt_actor_name VARCHAR(250),
+-- LENGTH INT,
+-- rating ENUM('1','2','3','4','5')
+-- );
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (1, 'Letter From Death Row, A', 'Nomi Tremayle',120,'5');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (2, 'Two Crimes (Dos crímenes)', 'Edgard Summers',155,'4');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (3, 'Woman on the Beach, The', 'Ruprecht Knappett',142,'5');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (4, 'Valdez Is Coming', 'Dallon Rey',123,'4');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (5, 'Man Called Adam, A', 'Gerry Seawright',125,'3');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (6, 'Ladies vs. Ricky Bahl', 'Terrell Medley',133,'4');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (7, 'Bad Moon', 'Aeriela De Giorgis',110,'2');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (8, 'Sweet Charity', 'Rolph Shuttleworth',100,'2');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (9, 'Général Idi Amin Dada: A Self Portrait (Général Idi Amin Dada: Autoportrait)', 'Tedra Abramsky',90,'3');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (10, 'Tadpole', 'Susanne O''Heffernan',210,'2');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (11, 'Missionary Man', 'Kelcey Broadley',122,'3');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (12, 'Abbott and Costello Meet Dr. Jekyll and Mr. Hyde', 'Valerie Azemar',133,'1');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (13, 'Sin of Madelon Claudet, The', 'Maggy Ashpital',111,'2');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (14, 'Beverly Hills Chihuahua 3', 'Corinne Ibbott',166,'3');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (15, 'Pulse', 'Corry Ledwith',144,'5');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (16, 'Elsewhere', 'Sibylla Sickling',155,'3');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (17, 'This Girl''s Life', 'Laurens Loveland',133,'2');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (18, 'Goofy Movie, A', 'Alexis Oakden',136,'3');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (19, 'Bungee Jumping of Their Own (Beonjijeompeureul hada)', 'Chen Poltone',138,'4');
+-- insert into film (id, film_title, filmt_actor_name,length,rating) values (20, '12 Angry Men', 'Kelvin Marchelli',166,'5');
+-- 
+-- tìm những bộ phim do những diễn viên phía dưới đóng
+-- SELECT *
+-- FROM film
+-- WHERE filmt_actor_name IN ('Susanne O''Heffernan','Sibylla Sickling','Alexis Oakden')
+
+--  tìm những bộ phim có thời lượng ở giữa 100 đến 150
+-- SELECT *
+-- FROM film
+-- WHERE LENGTH BETWEEN 100 AND 150
+
+-- tìm những bộ phim thời lượng nhỏ hơn thời lượng trung bình
+-- CREATE views AVG as
+-- SELECT * 
+-- FROM film 
+-- WHERE LENGTH < (SELECT avg(LENGTH )as length_avg
+-- FROM film)
+
+-- tìm những bộ phim có những chữ cái là chữ b nằm ở đầu
+-- SELECT *
+-- FROM film
+-- where film_title LIKE 'B%' 
+
+-- Tìm những bộ phim có vị trí thứ hai của tên là chữ u
+-- SELECT *
+-- FROM film
+-- WHERE film_title LIKE '_u%'
+--  
+
+-- tìm những bộ phim có những chữ cái là chữ be nằm ở đầu
+-- SELECT *
+-- FROM film
+-- where film_title LIKE 'BE%' 
+
+-- tìm những bộ phim có những chữ cái là chữ e kết thúc ở cuối
+-- SELECT *
+-- FROM film
+-- where film_title LIKE '%e' 
 
 
+-- tìm những bộ phim có những chữ cái là chữ e kết thúc ở cuối và thời lượng phim lớn hơn thời lượng trung bình
+-- SELECT *
+-- FROM film
+-- where film_title LIKE '%e' and LENGTH < (SELECT avg(LENGTH )as length_avg FROM film)
+-- 
 
-
-
+assignment06SELECT * 
+FROM film 
+WHERE LENGTH > (SELECT AVG(LENGTH) AS length_avg FROM film)
 
 
 
